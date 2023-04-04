@@ -74,7 +74,7 @@ More results and models are available in the [docs/MODEL_ZOO.md](docs/MODEL_ZOO.
     <img src="docs/posetrack2.gif", width="344">
 </p>
 
-Please read [trackers/README.md](trackers/) for details.
+Please read [alphapose/trackers/README.md](alphapose/trackers/) for details.
 
 ### CrowdPose
 <p align='center'>
@@ -102,7 +102,7 @@ Inference SMPL (Download the SMPL model `basicModel_neutral_lbs_10_207_0_v1.0.0.
 ``` bash
 ./scripts/inference_3d.sh ./configs/smpl/256x192_adam_lr1e-3-res34_smpl_24_3d_base_2x_mix.yaml ${CHECKPOINT} ${VIDEO_NAME} # ${OUTPUT_DIR}, optional
 ```
-For high level API, please refer to `./scripts/demo_api.py`. To enable tracking, please refer to [this page](./trackers).
+For high level API, please refer to `./scripts/demo_api.py`. To enable tracking, please refer to [this page](alphapose/trackers).
 
 - **Training**: Train from scratch
 ``` bash

@@ -10,81 +10,44 @@
 * torchvision 0.12.0+
 * numpy 
 * python-package setuptools >= 40.0, reported by [this issue](https://github.com/MVIG-SJTU/AlphaPose/issues/838)
-* Linux, [Windows user check here](#Windows)
+* Linux
 
 ### Code installation
 
-#### (Recommended) Install with conda
 
-Install conda from [here](https://repo.anaconda.com/miniconda/), Miniconda3-latest-(OS)-(platform).
+#### Install with pip
 ```shell
-# 1. Create a conda virtual environment.
-conda create -n alphapose python=3.7 -y
-conda activate alphapose
+
+# 0. Create install directory
+mkdir install
+export PYTHONUSERBASE=`pwd`/install
+
+# 1. Install Cuda 11
+wget https://developer.download.nvidia.com/compute/cuda/11.6.2/local_installers/cuda_11.6.2_510.47.03_linux.run -O cuda.run
+chmod +x cuda.run
+./cuda.run --silent --toolkitpath=${PYTHONUSERBASE} --toolkit --override --defaultroot=${PYTHONUSERBASE} --no-man-page 
 
 # 2. Install PyTorch
-conda install pytorch torchvision torchaudio pytorch-cuda=11.3 -c pytorch -c nvidia 
+mkdir build
+pip3 install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu116
 
 # 3. Get AlphaPose
 git clone https://github.com/MVIG-SJTU/AlphaPose.git
 cd AlphaPose
 
-
-# 4. install
-export PATH=/usr/local/cuda/bin/:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
-python -m pip install cython
-sudo apt-get install libyaml-dev
-################Only For Ubuntu 18.04#################
-locale-gen C.UTF-8
-# if locale-gen not found
-sudo apt-get install locales
-export LANG=C.UTF-8
-######################################################
-python setup.py build develop
-
-# 5. Install PyTorch3D (Optional, only for visualization)
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath
-conda install -c bottler nvidiacub
-pip install git+ssh://git@github.com/facebookresearch/pytorch3d.git@stable
-```
-
-#### Install with pip
-```shell
-# 1. Install PyTorch
-pip3 install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu113
-
-# Check torch environment by:  python3 -m torch.utils.collect_env
-
-# 2. Get AlphaPose
-git clone https://github.com/MVIG-SJTU/AlphaPose.git
-cd AlphaPose
-
-# 3. install
-export PATH=/usr/local/cuda/bin/:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:$LD_LIBRARY_PATH
+# 4. Install
+export PATH=${PYTHONUSERBASE}/bin/:$PATH
+export LD_LIBRARY_PATH=${PYTHONUSERBASE}/lib64/:$LD_LIBRARY_PATH
 pip install cython
-sudo apt-get install libyaml-dev
-python3 setup.py build develop --user
+pip install .
 
-# 4. Install PyTorch3D (Optional, only for visualization)
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath
-conda install -c bottler nvidiacub
-pip install git+ssh://git@github.com/facebookresearch/pytorch3d.git@stable
 ```
-
-#### Windows
-The installation process is same as above. But note that Windows users may face problem when installing cuda extension. Thus we disable the cuda extension in the setup.py by default. The affect is that models ended with "-dcn" is not supported. If you force to make cuda extension by modify [this line](https://github.com/MVIG-SJTU/AlphaPose/blob/master/setup.py#L124) to True, you should install Visual Studio due to the problem mentioned [here](https://github.com/MVIG-SJTU/AlphaPose/blob/master/setup.py#L121).
-We recommend Windows users to run models like FastPose, FastPose-duc, etc., as they also provide good accuracy and speed.
-
-For Windows user, if you meet error with PyYaml, you can download and install it manually from here: https://pyyaml.org/wiki/PyYAML.
-If your OS platform is `Windows`, make sure that Windows C++ build tool like visual studio 15+ or visual c++ 2015+ is installed for training.
 
 ### Models
-1. Download the object detection model manually: **yolov3-spp.weights**([Google Drive](https://drive.google.com/open?id=1D47msNOOiJKvPOXlnpyzdKA3k6E97NTC) | [Baidu pan](https://pan.baidu.com/s/1Zb2REEIk8tcahDa8KacPNA)). Place it into `detector/yolo/data`.
-2. (Optional) If you want to use [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX) as the detector, you can download the weights [here](https://github.com/Megvii-BaseDetection/YOLOX), and place them into `detector/yolox/data`. We recommend [yolox-l](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth) and [yolox-x](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_x.pth).
+1. Download the object detection model manually: **yolov3-spp.weights**([Google Drive](https://drive.google.com/open?id=1D47msNOOiJKvPOXlnpyzdKA3k6E97NTC) | [Baidu pan](https://pan.baidu.com/s/1Zb2REEIk8tcahDa8KacPNA)). Place it into `pretrained_models/yolo/`.
+2. (Optional) If you want to use [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX) as the detector, you can download the weights [here](https://github.com/Megvii-BaseDetection/YOLOX), and place them into `pretrained_models/yolox`. We recommend [yolox-l](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_l.pth) and [yolox-x](https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_x.pth).
 3. Download our pose models. Place them into `pretrained_models`. All models and details are available in our [Model Zoo](./MODEL_ZOO.md).
-2. For pose tracking, please refer to our [tracking docments](../trackers) for model download
+2. For pose tracking, please refer to our [tracking docments](../alphapose/trackers) for model download
 
 
 

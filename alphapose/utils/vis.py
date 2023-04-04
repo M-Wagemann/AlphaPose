@@ -234,7 +234,7 @@ def vis_frame_fast(frame, im_res, opt, vis_thres, format='coco'):
                 bbox = human['box']
                 bbox = [bbox[0], bbox[0]+bbox[2], bbox[1], bbox[1]+bbox[3]]#xmin,xmax,ymin,ymax
             else:
-                from trackers.PoseFlow.poseflow_infer import get_box
+                from alphapose.trackers.PoseFlow.poseflow_infer import get_box
                 keypoints = []
                 for n in range(kp_scores.shape[0]):
                     keypoints.append(float(kp_preds[n, 0]))
@@ -456,7 +456,7 @@ def vis_frame(frame, im_res, opt, vis_thres, format='coco'):
                 bbox = human['box']
                 bbox = [bbox[0], bbox[0]+bbox[2], bbox[1], bbox[1]+bbox[3]]#xmin,xmax,ymin,ymax
             else:
-                from trackers.PoseFlow.poseflow_infer import get_box
+                from alphapose.trackers.PoseFlow.poseflow_infer import get_box
                 keypoints = []
                 for n in range(kp_scores.shape[0]):
                     keypoints.append(float(kp_preds[n, 0]))
@@ -563,7 +563,7 @@ def vis_frame_smpl(frame, im_res, smpl_output, opt, vis_thres):
         # Draw bboxes
         if opt.showbox:
             if 'crop_box' not in human.keys():
-                from trackers.PoseFlow.poseflow_infer import get_box
+                from alphapose.trackers.PoseFlow.poseflow_infer import get_box
                 keypoints = []
                 for n in range(kp_scores.shape[0]):
                     keypoints.append(float(kp_preds[n, 0]))
@@ -677,7 +677,7 @@ def vis_frame_skeleton(frame, im_res, smpl_output, opt, vis_thres):
         # Draw bboxes
         if opt.showbox:
             if 'crop_box' not in human.keys():
-                from trackers.PoseFlow.poseflow_infer import get_box
+                from alphapose.trackers.PoseFlow.poseflow_infer import get_box
                 keypoints = []
                 for n in range(kp_scores.shape[0]):
                     keypoints.append(float(kp_preds[n, 0]))

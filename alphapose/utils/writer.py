@@ -44,7 +44,7 @@ class DataWriter():
                 os.mkdir(opt.outputpath + '/vis')
 
         if opt.pose_flow:
-            from trackers.PoseFlow.poseflow_infer import PoseFlowWrapper
+            from alphapose.trackers.PoseFlow.poseflow_infer import PoseFlowWrapper
             self.pose_flow_wrapper = PoseFlowWrapper(save_path=os.path.join(opt.outputpath, 'poseflow'))
 
         if self.opt.save_img or self.save_video or self.opt.vis:

@@ -10,10 +10,10 @@ import torch
 from tqdm import tqdm
 import natsort
 
-from detector.apis import get_detector
-from trackers.tracker_api import Tracker
-from trackers.tracker_cfg import cfg as tcfg
-from trackers import track
+from alphapose.detector.apis import get_detector
+from alphapose.trackers.tracker_api import Tracker
+from alphapose.trackers.tracker_cfg import cfg as tcfg
+from alphapose.trackers import track
 from alphapose.models import builder
 from alphapose.utils.config import update_config
 from alphapose.utils.detector import DetectionLoader

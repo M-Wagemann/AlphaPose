@@ -116,5 +116,4 @@ exp/json
 tmp_*/
 examples/res*/
 data/
-exp/
 data

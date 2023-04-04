@@ -126,15 +126,15 @@ def get_ext_modules():
         ext_modules = [
             make_cython_ext(
                 name='soft_nms_cpu',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/soft_nms_cpu.pyx']),
             make_cuda_ext(
                 name='nms_cpu',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/nms_cpu.cpp']),
             make_cuda_ext(
                 name='nms_cuda',
-                module='detector.nms',
+                module='alphapose.detector.nms',
                 sources=['src/nms_cuda.cpp', 'src/nms_kernel.cu']),
             make_cuda_ext(
                 name='roi_align_cuda',
