@@ -20,7 +20,7 @@ def get_detector(opt=None, yolocfg=default_yolocfg):
             opt.detector = 'yolox-x'
         cfg.MODEL_NAME = opt.detector.lower()
         cfg.MODEL_WEIGHTS = f'pretrained_models/yolox/{opt.detector.lower().replace("-", "_")}.pth'
-        return YOLOXDetector(cfg, opt)
+        return YOLOXDetector(yolocfg, opt)
     elif opt.detector == 'tracker':
         from alphapose.detector.tracker_api import Tracker
         from alphapose.detector.tracker_cfg import cfg
