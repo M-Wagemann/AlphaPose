@@ -30,15 +30,14 @@ if platform.system() != 'Windows':
 class YOLODetector(BaseDetector):
     def __init__(self, cfg, opt=None):
         super(YOLODetector, self).__init__()
-
         self.detector_cfg = cfg
         self.detector_opt = opt
-        self.model_cfg = cfg.get('CONFIG', 'configs/yolo/cfg/yolov3-spp.cfg')
-        self.model_weights = cfg.get('WEIGHTS', 'pretrained_models/yolo/yolov3-spp.weights')
-        self.inp_dim = cfg.get('INP_DIM', 608)
+        self.model_cfg = cfg['CONFIG']
+        self.model_weights = cfg['WEIGHTS']
+        self.inp_dim = cfg['INP_DIM']
         self.nms_thres = cfg.get('NMS_THRES', 0.6)
-        self.confidence = 0.3 if (False if not hasattr(opt, 'tracking') else opt.tracking) else cfg.get('CONFIDENCE', 0.05)
-        self.num_classes = cfg.get('NUM_CLASSES', 80)
+        self.confidence = 0.3 if (False if not hasattr(opt, 'tracking') else opt.tracking) else cfg['CONFIDENCE']
+        self.num_classes = cfg['NUM_CLASSES']
         self.model = None
 
     def load_model(self):

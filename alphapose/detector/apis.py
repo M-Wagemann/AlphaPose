@@ -6,12 +6,13 @@
 """API of detector"""
 from abc import ABC, abstractmethod
 
+default_yolocfg= {'CONFIG': 'configs/yolo/cfg/yolov3-spp.cfg', 'WEIGHTS': 'pretrained_models/yolo/yolov3-spp.weights', 
+                  'INP_DIM': 608, 'NMS_THRES': 0.6, 'CONFIDENCE': 0.1, 'NUM_CLASSES': 80}
 
-def get_detector(opt=None):
+def get_detector(opt=None, yolocfg=default_yolocfg):
     if opt.detector == 'yolo':
         from alphapose.detector.yolo_api import YOLODetector
-        from alphapose.detector.yolo_cfg import cfg
-        return YOLODetector(cfg, opt)
+        return YOLODetector(yolocfg, opt)
     elif 'yolox' in opt.detector:
         from alphapose.detector.yolox_api import YOLOXDetector
         from alphapose.detector.yolox_cfg import cfg
